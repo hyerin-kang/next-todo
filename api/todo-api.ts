@@ -41,3 +41,10 @@ export const toggleTodo = async (
   revalidateTag("todos");
   return data;
 };
+export const getTodoItem = async (id: Todo["id"]) => {
+  const response = await fetch(`${BASE_URL}/${id}`, {
+    next: { tags: ["todos", id] },
+  });
+  const data: Todo = await response.json();
+  return data;
+};
