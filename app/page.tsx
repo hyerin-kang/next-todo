@@ -4,7 +4,7 @@ import TodoList from "@/components/todo/TodoList";
 const HomePage = async () => {
   return (
     <div>
-      <div className="container mx-auto w-fit">
+      <div className="container mx-auto ">
         <TodoForm />
         <TodoList />
       </div>
