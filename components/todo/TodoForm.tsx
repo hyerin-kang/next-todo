@@ -1,5 +1,5 @@
 "use client";
-import { createTodo } from "@/api/todo-api";
+
 import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -10,7 +10,10 @@ const TodoForm = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const todoText = formData.get("todo-text") as string;
-    await createTodo(todoText);
+    await fetch("/api/todos", {
+      method: "POST",
+      body: JSON.stringify({ text: todoText }),
+    });
     if (todoText == "") {
       return alert("할일을 입력하세요");
     }

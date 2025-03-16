@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogFooter,
@@ -10,12 +9,16 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
-import { deleteTodo } from "@/api/todo-api";
 
 interface TodoDeleteBtnProps {
   id: string;
 }
 const TodoDeleteBtn = ({ id }: TodoDeleteBtnProps) => {
+  const handleDelete = async () => {
+    await fetch(`/api/todos/${id}`, {
+      method: "DELETE",
+    });
+  };
   return (
     <div>
       <AlertDialog>
@@ -28,12 +31,7 @@ const TodoDeleteBtn = ({ id }: TodoDeleteBtnProps) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>취소</AlertDialogCancel>
-            <Button
-              variant="destructive"
-              onClick={() => {
-                deleteTodo(id);
-              }}
-            >
+            <Button variant="destructive" onClick={handleDelete}>
               삭제
             </Button>
           </AlertDialogFooter>
