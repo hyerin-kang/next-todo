@@ -3,17 +3,17 @@
 import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useTodoMutation } from "@/query/useTodoMutation";
 
 const TodoForm = () => {
+  const { mutateAsync: createTodo } = useTodoMutation();
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
     const todoText = formData.get("todo-text") as string;
-    await fetch("/api/todos", {
-      method: "POST",
-      body: JSON.stringify({ text: todoText }),
-    });
+    await createTodo(todoText);
+
     if (todoText == "") {
       return alert("할일을 입력하세요");
     }
