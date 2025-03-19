@@ -3,10 +3,10 @@
 import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useTodoMutation } from "@/query/useTodoMutation";
+import { useCreateTodoMutation } from "@/query/useTodoMutation";
 
 const TodoForm = () => {
-  const { mutateAsync: createTodo } = useTodoMutation();
+  const { mutateAsync: createTodo } = useCreateTodoMutation();
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
