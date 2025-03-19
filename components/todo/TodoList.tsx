@@ -1,19 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import TodoItem from "./TodoItem";
-import { Todo } from "@/types/todo.type";
+import { useTodosQuery } from "@/query/useTodoQuery";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const response = await fetch("/api/todos");
-      const data: Todo[] = await response.json();
-      setTodos(data);
-    };
-    fetchTodos();
-  }, []);
+  const { data: todos } = useTodosQuery();
 
+  if (!todos) return <div>로딩중...</div>;
   return (
     <ul className="space-y-2">
       {todos.map((todo) => (

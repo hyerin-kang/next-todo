@@ -1,4 +1,3 @@
-"use server";
 import { Todo } from "@/types/todo.type";
 const BASE_URL = "http://localhost:4000/todos";
 export const getTodos = async () => {
