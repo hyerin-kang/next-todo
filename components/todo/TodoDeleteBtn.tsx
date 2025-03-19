@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   AlertDialog,
@@ -9,16 +10,15 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
+import { useDeleteTodoMutation } from "@/query/useTodoMutation";
+import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
 
 interface TodoDeleteBtnProps {
   id: string;
 }
 const TodoDeleteBtn = ({ id }: TodoDeleteBtnProps) => {
-  const handleDelete = async () => {
-    await fetch(`/api/todos/${id}`, {
-      method: "DELETE",
-    });
-  };
+  const { mutate: deleteTodo } = useDeleteTodoMutation();
+
   return (
     <div>
       <AlertDialog>
@@ -28,10 +28,16 @@ const TodoDeleteBtn = ({ id }: TodoDeleteBtnProps) => {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>정말삭제하시겠습니까?</AlertDialogTitle>
+            <AlertDialogDescription className="hidden"></AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>취소</AlertDialogCancel>
-            <Button variant="destructive" onClick={handleDelete}>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                deleteTodo(id);
+              }}
+            >
               삭제
             </Button>
           </AlertDialogFooter>
