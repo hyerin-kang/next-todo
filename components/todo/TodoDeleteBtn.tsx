@@ -12,6 +12,7 @@ import {
 import { Button } from "../ui/button";
 import { useDeleteTodoMutation } from "@/query/useTodoMutation";
 import { AlertDialogDescription } from "@radix-ui/react-alert-dialog";
+import { Trash2 } from "lucide-react";
 
 interface TodoDeleteBtnProps {
   id: string;
@@ -23,7 +24,9 @@ const TodoDeleteBtn = ({ id }: TodoDeleteBtnProps) => {
     <div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="destructive">삭제</Button>
+          <Button variant="destructive" size="icon">
+            <Trash2 />
+          </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
