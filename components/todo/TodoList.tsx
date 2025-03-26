@@ -1,10 +1,12 @@
 "use client";
 
+import { useTodoFilterStore } from "@/store/useTodoFilterStore";
 import TodoItem from "./TodoItem";
 import { useTodosQuery } from "@/query/useTodoQuery";
 
 const TodoList = () => {
-  const { data: todos } = useTodosQuery();
+  const { filter } = useTodoFilterStore();
+  const { data: todos } = useTodosQuery(filter);
 
   if (!todos) return <div>로딩중...</div>;
   return (

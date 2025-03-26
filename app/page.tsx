@@ -10,9 +10,15 @@ import {
 
 const HomePage = async () => {
   const queryClient = new QueryClient();
+
   await queryClient.prefetchQuery({
-    queryKey: ["todos"],
-    queryFn: getTodos,
+    queryKey: ["todos", "all"],
+    queryFn: () => getTodos(),
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ["todos", "completed"],
+    queryFn: () => getTodos("completed"),
   });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
